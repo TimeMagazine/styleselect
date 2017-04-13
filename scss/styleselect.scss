@@ -9,6 +9,7 @@ $ss-dropdown-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !default;
 $ss-standard-border: $ss-border-width solid #d0d0d0 !default;
 
 $ss-spacing-small: $ss-spacing / 2 !default;
+$ss-spacing-smallish: $ss-spacing / 3 !default; // Useful for the triangles
 $ss-spacing-tiny: $ss-spacing / 4 !default;
 
 // Hide real select boxes which have seen styled.
@@ -35,6 +36,8 @@ select[data-ss-uuid] {
 	}
 
 	.ss-selected-option {
+		// We like to avoid those default blue focus borders in Chrome -- @TimeMagazine
+		outline: none;
 		width: 100%;
 		background-image: $ss-selected-option-background;
 		border-radius: 2px;
@@ -42,11 +45,13 @@ select[data-ss-uuid] {
 		border: $ss-standard-border;
 		// The down arrow
 		&::after {
-			content: "▾";
+			// this is a more equilateral triangle
+			content: "\25bc";
 			position: absolute;
-			top: $ss-spacing-tiny;
+			top: $ss-spacing-smallish;
 			right: $ss-spacing-small;
 			display: block;
+			font-size: 12px; 			
 		}
 	}
 
@@ -57,6 +62,11 @@ select[data-ss-uuid] {
 		float: left;
 		width: 100%;
 		display: none;
+		// without this, the dropdown can get covered up
+		z-index: 10; 		
+		// allow scrolling for very long lists like all 50 states + DC
+		max-height: 300px;  
+		overflow-y: scroll;	
 		box-shadow: $ss-dropdown-shadow;
 		border: $ss-standard-border;
 		border-top: 0 none;
@@ -83,9 +93,14 @@ select[data-ss-uuid] {
 		.ss-dropdown {
 			display: block;
 		}
-		.ss-selected-option::after {
-			content: "▴";
+		// like above, switching to a triangle
+		.ss-selected-option::after { 
+			content: "\25b2";
+			position: absolute;
+			top: $ss-spacing-smallish;
+			right: $ss-spacing-small;
+			display: block;
+			font-size: 12px;
 		}
 	}
-
 }

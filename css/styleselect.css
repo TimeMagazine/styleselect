@@ -1,3 +1,4 @@
+@charset "UTF-8";
 select[data-ss-uuid] {
   display: none;
   pointer-events: none; }
@@ -9,7 +10,6 @@ select[data-ss-uuid] {
   .style-select, .style-select * {
     padding: 0;
     margin: 0;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     text-align: left;
     line-height: 19px;
@@ -17,18 +17,19 @@ select[data-ss-uuid] {
     font-weight: 300;
     cursor: pointer; }
   .style-select .ss-selected-option {
+    outline: none;
     width: 100%;
-    background-image: -webkit-linear-gradient(top, #fefefe, #f2f2f2);
     background-image: linear-gradient(to bottom, #fefefe, #f2f2f2);
     border-radius: 2px;
     padding: 6px;
     border: 1px solid #d0d0d0; }
     .style-select .ss-selected-option::after {
-      content: "▾";
+      content: "\25bc";
       position: absolute;
-      top: 6px;
+      top: 8px;
       right: 12px;
-      display: block; }
+      display: block;
+      font-size: 12px; }
   .style-select .ss-dropdown {
     top: 32px;
     left: 0;
@@ -36,6 +37,9 @@ select[data-ss-uuid] {
     float: left;
     width: 100%;
     display: none;
+    z-index: 10;
+    max-height: 300px;
+    overflow-y: scroll;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #d0d0d0;
     border-top: 0 none; }
@@ -53,4 +57,9 @@ select[data-ss-uuid] {
   .style-select.open .ss-dropdown {
     display: block; }
   .style-select.open .ss-selected-option::after {
-    content: "▴"; }
+    content: "\25b2";
+    position: absolute;
+    top: 8px;
+    right: 6px;
+    display: block;
+    font-size: 12px; }
